@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Growing Button</title>
+<style>
+body {
+  margin: 0;
+  overflow: hidden; /* Prevents scrollbars */
+}
+#growButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
+  font-size: 20px; /* Constant font size */
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<button id="growButton">Click Me!</button>
+<script>
+const button = document.getElementById('growButton');
+let buttonWidth = button.offsetWidth;
+let buttonHeight = button.offsetHeight;
+let growthRate = 20; // Adjust as needed
+
+const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink']; // Add more colors as needed
+
+function getRandomColor() {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+button.addEventListener('click', () => {
+  buttonWidth += growthRate;
+  buttonHeight += growthRate;
+  button.style.width = buttonWidth + 'px';
+  button.style.height = buttonHeight + 'px';
+  button.style.backgroundColor = getRandomColor(); // Change color
+
+  // Check if button fills the screen
+  if (buttonWidth >= window.innerWidth && buttonHeight >= window.innerHeight) {
+    button.removeEventListener('click', arguments.callee);
+    button.textContent = 'Screen Filled!';
+    button.style.cursor = 'default'; // Remove pointer
+  }
+});
+</script>
+</body>
+</html>
